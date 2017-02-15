@@ -4,22 +4,25 @@ import Answer from './Answer';
 
 class OneQuestion extends React.Component {
 	render() {
-		console.log(this)
+		//console.log(this)
+		//console.log('loading question:', this.props.quiz.id)
 		return (
 			<form onSubmit={this.props.handleSubmit} key={Math.random()}>
-				<div key={this.props.quiz.id}>
-					<h3>{this.props.quiz.name}</h3>
-					<p>{this.props.quiz.question}</p>
-					<Answer answers={this.props.quiz.answer} handleChange={this.props.handleChange} />
+				<div>
+					<h3 className="text-info" ref='nam'>{this.props.quiz.name}</h3>
+					<p className="text-success" ref='ques'>{this.props.quiz.question}</p>
+					<Answer answers={this.props.quiz.answer}
+						ref='ans'
+						questionId={this.props.quiz._id}
+						handleClick={this.props.handleClick}
+						//value={this.state.value}
+						//onClick={this.props.handleClick}
+					/>
 				</div>
 			</form>
 		)
 	}
 }
-
-/*const d = () => (
-		<h3> No questions left </h3>
-	)*/
 
 class Quiz extends React.Component {
 	constructor(props) {
@@ -30,50 +33,57 @@ class Quiz extends React.Component {
 		this.state = {
 			value: '',
 			currentQuestion: currentQuestion,
-
+			button: false,
+			answers: {},
 		};
-
-		this.handleChange = this.handleChange.bind(this);
 	}
-
-	handleChange(event) {
-		this.setState({value: event.target.value});
-	}
-
-	/*handleSubmit(event) {
-		event.preventDefault();
-		console.log(this.state)
-		alert('Your answer is ' + this.state.value);
-	}*/
 
 	showPrevQuestion() {
 		if (this.state.currentQuestion < 1) {
 			return
 		}
 		this.setState({
-			currentQuestion: this.state.currentQuestion - 1
+			currentQuestion: this.state.currentQuestion - 1,
+			button: false,
 		})
 	}
 
 	showNextQuestion() {
-		// console.log('Current state:', this.state.currentQuestion)
-		//(this.props.allQuestions.length -1)
 		if (this.state.currentQuestion > 9) {
 			return
 		}
 		this.setState({
-			currentQuestion: this.state.currentQuestion + 1
+			currentQuestion: this.state.currentQuestion + 1,
+			button: false,
 		})
 	}
 
+	handleSaveAnswer(id, value) {
+		//event.preventDefault();
+
+		console.log('question id:', id)
+		console.log('value', value)
+
+		let newAnswers = this.state.answers
+
+		newAnswers[id] = value
+
+		this.setState({
+			answers: newAnswers,
+			button: true,
+			value: value
+		})
+		console.log('my answer list:', this.state.answers)
+
+	}
+
 	render() {
-		console.log('State:', this.state)
+		//console.log('State:', this.state)
 
-		console.log('number:', this.state.currentQuestion)
+		/*console.log('number:', this.state.currentQuestion)
 		console.log('all questions:', this.props.allQuestions.length)
-
+*/
 		let question = this.props.allQuestions[this.state.currentQuestion];
-		//console.log(question)
 
 		console.log(_.isUndefined(question))
 
@@ -81,16 +91,30 @@ class Quiz extends React.Component {
 			<div>
 				{_.isUndefined(question) ? <d/> :
 					<div className='demo'>
-						<OneQuestion quiz={question} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+						<OneQuestion
+							quiz={question}
+							handleClick={this.handleSaveAnswer.bind(this)}
+							value={this.state.value}/>
 						<div>
-							{this.state.currentQuestion !== 0 ?
-								<button onClick={this.showPrevQuestion.bind(this)}>Prev</button> : null
+							{this.state.button === true ?
+								<button type='button'
+								//value={this.state.value}
+								onClick={this.showPrevQuestion.bind(this)}
+								className='btn btn-success'>Prev</button> : null
 							}
-
-							<button onClick={this.showNextQuestion.bind(this)}>Next</button>
+							{this.state.button === true?
+							<button type='button'onClick={this.showNextQuestion.bind(this)}
+							className='btn btn-success' >Next</button> : null
+							}
 						</div>
 					</div>
 				}
+				<div>
+					{this.state.value ?
+						'your answer is ' + this.state.value :
+						'You have not chosen an answer yet'
+					}
+				</div>
 			</div>
 		)
 	}
