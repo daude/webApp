@@ -63,12 +63,20 @@ class Quiz extends React.Component {
 
 	saveData() {
 
+		/*var o = {}
+
+		_.each(this.state.answers, (i, j) => {
+			// o[i] = j
+			// o._id = i
+		})*/
+
+		/*console.log('answers', this.state.answers)
+		console.log('o', o)*/
+
 		$.ajax({
 			type: 'POST',
 			url: 'http://localhost:4444/answers/',
-			data: {
-
-			},
+			data: this.state.answers,
 			success: function( data ) {
 				console.log('data', JSON.parse(data));
 			},
