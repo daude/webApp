@@ -1,8 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import ReactDOM from 'react-dom'
 import Answer from './Answer';
 import Result from './result';
 import $ from 'jquery';
+import Routes from './Routes';
 
 class OneQuestion extends React.Component {
 	render() {
@@ -23,6 +25,7 @@ class OneQuestion extends React.Component {
 	}
 }
 
+
 class Quiz extends React.Component {
 	constructor(props) {
 		super(props);
@@ -30,10 +33,25 @@ class Quiz extends React.Component {
 		let currentQuestion = 0;
 
 		this.state = {
+			data: [],
 			value: '',
 			currentQuestion: currentQuestion,
 			answers: {},
 		};
+	}
+
+	componentDidMount() {
+		console.log('componentDidMount')
+
+		$.ajax({
+			type: 'GET',
+			url: 'http://localhost:4444/quiz/',
+			dataType: 'json',
+			//cache: false,
+			success: function(data) {
+				this.setState({data: data}); // Notice this
+			}.bind(this),
+		});
 	}
 
 	showPrevQuestion() {
@@ -87,19 +105,18 @@ class Quiz extends React.Component {
 	render() {
 		//console.log('questionId', this.state.questionId);
 		//console.log('value', this.state.value);
-		/*console.log('State:', this.state)
+		console.log('State:', this.state)
+		console.log('currentQuestion:', this.state.currentQuestion)
+		console.log('all questions:', this.state.data)
 
-		console.log('number:', this.state.currentQuestion)
-		console.log('all questions:', this.props.allQuestions.length)*/
-
-		let question = this.props.allQuestions[this.state.currentQuestion];
+		let question = this.state.data[this.state.currentQuestion];
 		//console.log(this.props)
 		//console.log('Checking question:', _.isUndefined(question))
 		//console.log(_.isUndefined(question))
 		//console.log('this.state.answers', this.props.allQuestions)
 		//console.log('this.state.answers', this.state.answers)
 
-		if (this.props.allQuestions.length > this.state.currentQuestion) {
+		if (this.state.data.length > this.state.currentQuestion) {
 			return (
 				<div>
 					{_.isUndefined(question) ? <d/> :
@@ -147,7 +164,7 @@ class Quiz extends React.Component {
 			return (
 				<div className='btn btn-success'>
 					<p className='btn btn-info'>Quiz finished,your result are here</p>
-					<Result allQuestions={this.props.allQuestions}
+					<Result allQuestions={this.state.data}
 					answers={this.state.answers}
 					/>
 					<div>
@@ -160,6 +177,14 @@ class Quiz extends React.Component {
 			);
 		}
 	}
+
 }
 
 export default Quiz;
+
+ReactDOM.render(
+	//<Quiz allQuestions={JSON.parse(data)} />,
+	<Routes />,
+	document.getElementById('quiz-start')
+);
+
