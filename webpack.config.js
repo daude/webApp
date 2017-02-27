@@ -1,22 +1,12 @@
-//var path = require('path')
-// const webpack = require('webpack')
 module.exports = {
-  entry: './app.js',
+  entry: './quiz.js',
   output: {
     filename: 'bundle.js'
   },
  module: {
-   /*preLoaders: [
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'jshint-loader'
-
-      }
-   ],*/
    loaders: [
      {
-       test: /bootstrap\/js\//,
+       test: /\.js$/,
        exclude: /node_modules/,
        loader: 'babel-loader',
        query: {
@@ -25,12 +15,6 @@ module.exports = {
         }
       }
     ],
-    // plugins: [
-    //     new webpack.ProvidePlugin({
-    //        $: 'jquery',
-    //        jQuery: 'jquery'
-    //    })
-    // ]
   },
   resolve: {
    extensions: ['.js']
