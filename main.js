@@ -1,4 +1,5 @@
 import React from 'react'
+//import ReactDOM from 'react-dom'
 import {Link} from 'react-router-dom';
 
 class Main extends React.Component{
@@ -22,3 +23,10 @@ class Main extends React.Component{
 }
 
 export default Main;
+
+/*ReactDOM.render(
+	//<Quiz allQuestions={JSON.parse(data)} />,
+	<Quiz />,
+	document.getElementById('quiz-start')
+);
+*/
