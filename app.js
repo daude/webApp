@@ -1,14 +1,21 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Quiz from './quiz';
-import $ from 'najax';
+/*import Quiz from './quiz';
+//import Home from './welcome';
+import Result from './result';
+import Main from './main';*/
+//import Quiz from './Routes';
+import Routes from './Route';
+//import Routes from './Routes';
+//import {BrowserRouter as Router, browserHistory, Route} from 'react-router-dom';
 
-$.get('http://localhost:4444/quiz/', function( data ) {
-	console.log('data', JSON.parse(data));
+//import Home from './startQuiz';
+//import $ from 'najax';
 
-	ReactDOM.render(
-		<Quiz allQuestions={JSON.parse(data)} />,
-		document.getElementById('quiz-start')
-	);
-});
+ReactDOM.render(
+	//<Quiz allQuestions={JSON.parse(data)} />,
+	<Routes />,
 
+	document.getElementById('quiz-start')
+);
