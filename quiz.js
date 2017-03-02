@@ -1,10 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
-import ReactDOM from 'react-dom'
+//import ReactDOM from 'react-dom'
 import Answer from './Answer';
 import Result from './result';
 import $ from 'jquery';
-import Routes from './Routes';
+
+//import Routes from './Routes';
 
 class OneQuestion extends React.Component {
 	render() {
@@ -41,7 +42,7 @@ class Quiz extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('componentDidMount')
+		//console.log('quiz--->', 'http:localhost:4444/quiz/')
 
 		$.ajax({
 			type: 'GET',
@@ -96,7 +97,8 @@ class Quiz extends React.Component {
 			url: 'http://localhost:4444/answers/',
 			data: this.state.answers,
 			success: function( data ) {
-				console.log('data', JSON.parse(data));
+				console.log('data---->', data)
+				console.log('data', JSON.stringify(data));
 			},
 			// dataType: dataType
 		});
@@ -105,9 +107,9 @@ class Quiz extends React.Component {
 	render() {
 		//console.log('questionId', this.state.questionId);
 		//console.log('value', this.state.value);
-		console.log('State:', this.state)
+		/*console.log('State:', this.state)
 		console.log('currentQuestion:', this.state.currentQuestion)
-		console.log('all questions:', this.state.data)
+		console.log('all questions:', this.state.data)*/
 
 		let question = this.state.data[this.state.currentQuestion];
 		//console.log(this.props)
@@ -182,9 +184,9 @@ class Quiz extends React.Component {
 
 export default Quiz;
 
-ReactDOM.render(
+/*ReactDOM.render(
 	//<Quiz allQuestions={JSON.parse(data)} />,
 	<Routes />,
 	document.getElementById('quiz-start')
-);
+);*/
 
