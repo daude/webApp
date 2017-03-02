@@ -8,7 +8,7 @@ class Result extends React.Component {
     }
     render() {
         //console.log('this.props.allQuestions', this.props.allQuestions);
-        console.log('this.props.answers', this.props.answers)
+        //console.log('this.props.answers', this.props.answers)
 
         return (
             <div id='test_questions'>
