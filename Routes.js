@@ -1,6 +1,6 @@
-
 import React from 'react';
 //import Home from './welcome';
+import Login from './login';
 import Quiz from './quiz';
 import QuizResult from './quizResult';
 import Main from './main';
@@ -25,7 +25,8 @@ class Routes extends React.Component {
 						</button>
 
 						<hr/>*/}
-						<Route exact path='/' component={Main} />
+						<Route exact path='/' component={Login} />
+						<Route path='/main' component={Main} />
 						<Route path='/quiz' component={Quiz} />
 						<Route path='/quizResult' component={QuizResult} />
 					</div>
