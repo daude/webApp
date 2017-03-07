@@ -1,5 +1,6 @@
 import React from 'react';
 //import Home from './welcome';
+import Register from './register'
 import Login from './login';
 import Quiz from './quiz';
 import QuizResult from './quizResult';
@@ -27,6 +28,7 @@ class Routes extends React.Component {
 						<hr/>*/}
 						<Route exact path='/' component={Login} />
 						<Route path='/main' component={Main} />
+						<Route path='/register' component={Register} />
 						<Route path='/quiz' component={Quiz} />
 						<Route path='/quizResult' component={QuizResult} />
 					</div>
