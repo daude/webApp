@@ -97,7 +97,7 @@ class Quiz extends React.Component {
 			url: 'http://localhost:4444/answers/',
 			data: this.state.answers,
 			success: function( data ) {
-				console.log('data---->', data)
+				//console.log('data---->', data)
 				console.log('data', JSON.stringify(data));
 			},
 			// dataType: dataType
