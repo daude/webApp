@@ -1,3 +1,5 @@
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
     entry: './app.js',
     output: {
@@ -12,7 +14,11 @@ module.exports = {
                 query: {
                     cacheDirectory: true,
                     presets: ['react', 'es2015']
-                }
+                },
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader',
             }
         ],
     },
