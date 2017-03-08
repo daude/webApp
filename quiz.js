@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Answer from './Answer';
 import Result from './result';
 import $ from 'jquery';
-
+import {Link} from 'react-router-dom'
 //import Routes from './Routes';
 
 class OneQuestion extends React.Component {
@@ -168,12 +168,17 @@ class Quiz extends React.Component {
 					<p className='btn btn-info'>Quiz finished,your result are here</p>
 					<Result allQuestions={this.state.data}
 					answers={this.state.answers}
-					/>
+					/><br/>
 					<div>
 						<button type='button' className='btn btn-info'
 							onClick={this.saveData.bind(this)}>
 							saveData
-						</button>
+						</button><br/><br/>
+						<div>
+							<button className='btn btn-info'>
+								<Link to="/main">Back to Quiz</Link>
+							</button>
+						</div>
 					</div>
 				</div>
 			);
