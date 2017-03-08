@@ -3,6 +3,7 @@ import React from 'react';
 import Register from './register'
 import Login from './login';
 import Quiz from './quiz';
+import NewUser from './newUser';
 import QuizResult from './quizResult';
 import Main from './main';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -28,6 +29,8 @@ class Routes extends React.Component {
 						<hr/>*/}
 						<Route exact path='/' component={Login} />
 						<Route path='/main' component={Main} />
+						<Route path='/login' component={Login} />
+						<Route path='/newUser' component={NewUser} />
 						<Route path='/register' component={Register} />
 						<Route path='/quiz' component={Quiz} />
 						<Route path='/quizResult' component={QuizResult} />
