@@ -3,6 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 //import _ from 'lodash';
 import $ from 'jquery';
 import './styles/login.css'
+import Main from './main'
 
 class Login extends React.Component {
 	constructor (props){
@@ -16,8 +17,27 @@ class Login extends React.Component {
 	handleLogin() {
 
 		// get user name from input
-		let name = 'name from input'
-		let password = 'password from input'
+		let name = this.state.username //#1
+		console.log('name', this.state.username)
+
+		let password = this.state.password // #2
+		console.log('Password', this.state.password)
+
+		// compare passwords from form and from mongo
+		let notFoundUser = (error) => {
+			console.error('error:', error)
+		}
+
+		let foundUser = (userFromMongo) => {
+			console.log('user from mongo:', userFromMongo) // #3
+			// console.log('user from mongo:', this.state.users[this.state.name]) // #3
+
+			if (userFromMongo.password === password) {
+				this.setState({loginComplete: true})
+			} else {   // #4
+				console.log('Password must be match')
+			}
+		}
 
 		// get that user from mongo
 		$.ajax({
@@ -25,15 +45,10 @@ class Login extends React.Component {
             url: 'http://localhost:4444/users/' + name,
             //data: JSON,
             success: foundUser,
+            error: notFoundUser,
             // dataType: dataType
         });
 
-		// compare passwords from form and from mongo
-		let foundUser = (user) => {
-			console.log('user from mongo:', user)
-
-			user.password === password
-		}
 	}
 
 		// if passwords same -> goto next page
@@ -67,16 +82,16 @@ class Login extends React.Component {
 		})
 	}
 
-	render (){
+	render() {
 		// check state to see if we need to redriect to logged in page (quiz)
-		const {from}= this.props.location.state || {from: {pathname: '/'}}
-		const {redirectToReferrer}= this.state
+		// const {Login}= this.state.users || {Login: {pathname: '/'}}
+		// const {redirectToReferrer}= this.state
 
-		if (redirectToReferrer) {
-		return (
-			<Redirect to={from}/>
-		)
-    }
+		if (this.state.loginComplete) {
+			return (
+				<Redirect to={Main}/>
+			)
+		}
 
 		return (
 			<div className = "container">
@@ -95,16 +110,24 @@ class Login extends React.Component {
 							/*id='name'*/
 						/>
 
-						<input type="password" className="form-control" /*id='password'*/ onChange={this.updatePassword.bind(this)}
+						<input type="password"
+							className="form-control"
+							/*id='password'*/
+							onChange={this.updatePassword.bind(this)}
 							placeholder="Password" required=""
 						/>
 
-						<button className="btn btn-lg btn-secondary btn-block" onClick={this.handleLogin.bind(this)}>
+						<button className="btn btn-lg btn-secondary btn-block"
+							onClick={this.handleLogin.bind(this)}>
 							Login
 						</button>
 
 						<br/>
-						<span className="pull-right"><Link to="/register">Register</Link></span>
+						<span className="pull-right">
+							<Link to="/register">
+								Register
+							</Link>
+						</span>
 					</form>
 				</div>
 			</div>
