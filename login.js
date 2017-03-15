@@ -3,7 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 //import _ from 'lodash';
 import $ from 'jquery';
 import './styles/login.css'
-import Main from './main'
+//import Main from './main'
 
 class Login extends React.Component {
 	constructor (props){
@@ -14,14 +14,23 @@ class Login extends React.Component {
 		};
 	}
 
-	handleLogin() {
+	handleLogin(e) {
+		e.preventDefault()
 
 		// get user name from input
 		let name = this.state.username //#1
-		console.log('name', this.state.username)
+		//console.log('name', this.state.username)
+		if (!name) {
+			console.error('username is required')
+			return
+		}
 
 		let password = this.state.password // #2
-		console.log('Password', this.state.password)
+		//console.log('Password', this.state.password)
+		if (!password) {
+			console.error('password is required')
+			return
+		}
 
 		// compare passwords from form and from mongo
 		let notFoundUser = (error) => {
@@ -33,6 +42,7 @@ class Login extends React.Component {
 			// console.log('user from mongo:', this.state.users[this.state.name]) // #3
 
 			if (userFromMongo.password === password) {
+				console.log('ok to login now')
 				this.setState({loginComplete: true})
 			} else {   // #4
 				console.log('Password must be match')
@@ -41,13 +51,13 @@ class Login extends React.Component {
 
 		// get that user from mongo
 		$.ajax({
-            type: 'GET',
-            url: 'http://localhost:4444/users/' + name,
-            //data: JSON,
-            success: foundUser,
-            error: notFoundUser,
-            // dataType: dataType
-        });
+			type: 'GET',
+			url: 'http://localhost:4444/users/' + name,
+			//data: JSON,
+			success: foundUser,
+			error: notFoundUser,
+			// dataType: dataType
+		});
 
 	}
 
@@ -89,36 +99,49 @@ class Login extends React.Component {
 
 		if (this.state.loginComplete) {
 			return (
-				<Redirect to={Main}/>
+				<div>
+					<Redirect from='/login' to='/main' />
+				</div>
 			)
-		}
-
+		} /*else {
+			<div>
+				<p>username or Password doesn't match</p>
+				<Redirect to='/main'/>
+			</div>
+		}*/
 		return (
 			<div className = "container">
 				<div className="wrapper">
-					<form action="http://localhost:4444/users/" method="post" name="Login_Form" className="form-signin">
+					<form onSubmit={this.handleSubmit}
+						name="Login_Form" className="form-signin">
 						<h3 className="form-signin-heading">Welcome Back! Please Sign In</h3>
 						<hr className="colorgraph" /><br/>
-
-						<input
-							type="text"
-							className="form-control"
-							onChange={this.updateName.bind(this)}
-							placeholder="Username"
-							required=""
-							autoFocus=""
-							/*id='name'*/
-						/>
-
-						<input type="password"
-							className="form-control"
-							/*id='password'*/
-							onChange={this.updatePassword.bind(this)}
-							placeholder="Password" required=""
-						/>
-
-						<button className="btn btn-lg btn-secondary btn-block"
-							onClick={this.handleLogin.bind(this)}>
+						<div>
+							<input
+								type="text"
+								className="form-control"
+								onChange={this.updateName.bind(this)}
+								placeholder="Username"
+								required="true"
+								autoFocus=""
+								id='Username'
+							/>
+						</div>
+						<div>
+							<input
+								type="password"
+								className="form-control"
+								onChange={this.updatePassword.bind(this)}
+								placeholder="Password"
+								required="true"
+								autoFocus=""
+								id='password'
+							/>
+						</div>
+						<button
+							className="btn btn-lg btn-secondary btn-block"
+							onClick={this.handleLogin.bind(this)}
+						>
 							Login
 						</button>
 
