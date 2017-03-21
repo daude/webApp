@@ -11,6 +11,7 @@ class Register extends React.Component{
 		this.state = {
 			// usernames: {},
 			users: {},
+			messege: 'congratulation, you have successfully create your account'
 		};
 	}
 
@@ -31,6 +32,7 @@ class Register extends React.Component{
 			},
 			// dataType: dataType
 		});
+		alert(this.state.messege)
 	}
 
 
@@ -106,10 +108,10 @@ class Register extends React.Component{
 										onClick={this.handleSave.bind(this)}
 										className="btn btn-success"
 									>
-										<Link to='/newUser'>Save</Link>
+										Save
 									</button>
 									<button id="cancel" name="cancel" className="btn btn-danger">
-										<Link to='/login'>Cancel</Link>
+										<Link to='/login'>Back</Link>
 									</button>
 								</div>
 							</div>
@@ -122,129 +124,3 @@ class Register extends React.Component{
 }
 
 export default Register;
-
-							{/*<div className="form-group">
-								<label className="col-md-4 control-label"> Re-type Password</label>
-								<div className="col-md-4">
-									<input id="rpassword" name="rpassword" type="password" placeholder="Re-type Password"
-									className="form-control input-md" required="" />
-									{/*<span className="help-block">Retype password</span>*/}
-								{/*</div>*/}
-							{/*</div>*/}
-
-							{/*<div className="form-group">*/}
-							{/*	<label className="col-md-4 control-label">Address</label>
-								<div className="col-md-4">
-									<input id="address1" name="address1" type="text" placeholder="Address "
-									className="form-control input-md" required=""/>
-								</div>
-							</div>
-
-							<div className="form-group">
-								<label className="col-md-4 control-label">Address 2</label>
-								<div className="col-md-4">
-									<input id="address1" name="address2" type="text" placeholder="Address2"
-									className="form-control input-md"/>
-								</div>
-							</div>
-
-							<div className="form-group">
-								<label className="col-md-4 control-label">City</label>
-								<div className="col-md-4">
-									<input id="city" name="city" type="text" placeholder="City"
-									className="form-control input-md" required=""/>
-								</div>
-							</div>
-
-							<div className="form-group">
-								<label className="col-md-4 control-label">Select Country</label>
-									<div className="col-md-4">
-										<select id="selectbasic" name="selectbasic" className="form-control">
-											<option value="">Choose State:</option>
-											<option value="AL">Alabama</option>
-											<option value="AK">Alaska</option>
-											<option value="AZ">Arizona</option>
-											<option value="AR">Arkansas</option>
-											<option value="CA">California</option>
-											<option value="CO">Colorado</option>
-											<option value="CT">Connecticut</option>
-											<option value="DE">Delaware</option>
-											<option value="FL">Florida</option>
-											<option value="GA">Georgia</option>
-											<option value="HI">Hawaii</option>
-											<option value="ID">Idaho</option>
-											<option value="IL">Illinois</option>
-											<option value="IN">Indiana</option>
-											<option value="IA">Iowa</option>
-											<option value="KS">Kansas</option>
-											<option value="KY">Kentucky</option>
-											<option value="LA">Louisiana</option>
-											<option value="ME">Maine</option>
-											<option value="MD">Maryland</option>
-											<option value="MA">Massachusetts</option>
-											<option value="MI">Michigan</option>
-											<option value="MN">Minnesota</option>
-											<option value="MS">Mississippi</option>
-											<option value="MO">Missouri</option>
-											<option value="MT">Montana</option>
-											<option value="NE">Nebraska</option>
-											<option value="NE">Nepal</option>
-											<option value="NV">Nevada</option>
-											<option value="NH">New Hampshire</option>
-											<option value="NJ">New Jersey</option>
-											<option value="NM">New Mexico</option>
-											<option value="NY">New York</option>
-											<option value="NC">North Carolina</option>
-											<option value="ND">North Dakota</option>
-											<option value="OH">Ohio</option>
-											<option value="OK">Oklahoma</option>
-											<option value="OR">Oregon</option>
-											<option value="PA">Pennsylvania</option>
-											<option value="RI">Rhode Island</option>
-											<option value="SC">South Carolina</option>
-											<option value="SD">South Dakota</option>
-											<option value="TN">Tennessee</option>
-											<option value="TX">Texas</option>
-											<option value="UT">Utah</option>
-											<option value="VT">Vermont</option>
-											<option value="VA">Virginia</option>
-											<option value="WA">Washington</option>
-											<option value="WV">West Virginia</option>
-											<option value="WI">Wisconsin</option>
-											<option value="WY">Wyoming</option>
-										</select>
-									</div>
-							</div>
-*/}
-							{/*<div className="form-group">
-								<label className="col-md-4 control-label">Zip Code</label>
-								<div className="col-md-4">
-									<input id="zip" name="zip" type="text" placeholder="Zip Code"
-									className="form-control input-md" required=""/>
-								</div>
-							</div>*/}
-
-							{/*<div className="form-group">
-								<label className="col-md-4 control-label">Contact Name</label>
-								<div className="col-md-4">
-									<input id="contactname" name="contactname" type="text" placeholder="Full Name"
-									className="form-control input-md" required=""/>
-								</div>
-							</div>
-
-							<div className="form-group">
-								<label className="col-md-4 control-label">Contact Phone</label>
-								<div className="col-md-4">
-									<input id="contactphone" name="contactphone" type="text" placeholder="Phone Number"
-									className="form-control input-md" required=""/>
-								</div>
-							</div>
-
-							<div className="form-group">
-								<label className="col-md-4 control-label">Email</label>
-								<div className="col-md-4">
-									<input id="contactemail" name="contactemail" type="text" placeholder="Email Address"
-									className="form-control input-md" required=""/>
-								</div>
-							</div>*/}
-
