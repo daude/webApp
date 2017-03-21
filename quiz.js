@@ -38,6 +38,7 @@ class Quiz extends React.Component {
 			value: '',
 			currentQuestion: currentQuestion,
 			answers: {},
+			messege: 'your data was saved'
 		};
 	}
 
@@ -102,6 +103,7 @@ class Quiz extends React.Component {
 			},
 			// dataType: dataType
 		});
+		alert(this.state.messege);
 	}
 
 	render() {
